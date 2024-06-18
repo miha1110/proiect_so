@@ -1,0 +1,45 @@
+#!/bin/bash
+
+actualizare_logged_in_users() {
+logged_in_users=()
+while IFS= read -r user; do
+    logged_in_users+=("$user")
+done < "fisier_logati"
+
+
+}
+## programul final
+optiune=0
+while [ $optiune -ne 8 ]
+do      actualizare_logged_in_users
+        echo
+        echo "Alegeti optiunea dorita: "
+        echo "1. introduceti un utilizator nou"
+        echo "2. autentificarea la un utilizator existent"
+        echo "3. delogarea unui utilizator"
+        echo "4. Afisare persoane logate"
+        echo "5. Generarea de raport"
+        echo "6. Afisare raport"
+        echo "7. Stergere utilizator"
+        echo "8. Iesire"
+        read optiune
+        if [[ $optiune -lt 1 || $optiune -gt 8 ]]; then
+                echo "Optiune invalida"
+        elif [ $optiune -eq 1 ]; then
+                ./functia1.sh
+        elif [ $optiune -eq 2 ]; then
+                ./functia2_login.sh
+        elif [ $optiune -eq 3 ]; then
+                ./functia2_logout.sh
+        elif [ $optiune -eq 4 ]; then
+                echo
+                if [ ${#logged_in_users[@]} -le 0 ]; then #daca numarul de pers>
+                        echo "Nu exista nicio persoana logata momentan."
+                else echo "Persoanele logate sunt: ${logged_in_users[@]}" #altf>
+                fi
+        elif [ $optiune -eq 5 ]; then
+                ./functia3.sh
+        elif [ $optiune -eq 6 ]; then
+                ./afisare_raport.sh
+        elif [ $optiune -eq 7 ]; then
+                ./stergere_utilizator.sh
