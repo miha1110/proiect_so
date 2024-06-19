@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "Numele utilizatorului:"
+read nume
+
+grep "$nume" "lista_nume.csv" && echo "Utilizatorul $nume exista deja" && retur>
+
+echo "Adresa de mail:"
+read mail
+if [[ ! "$mail"  = *"@"*"."* ]]; then #Daca in mail exista un @ si un .
+
+        echo "Adresa de mail nu este valida"
+        exit 1
+fi
+
+echo "Parola:"
+read -s parola
+
+id=$((RANDOM))
+
+echo "$id,$nume,$mail,$parola,last_login " >> lista_nume.csv
+mkdir -p ./utilizatori/$nume/home
+echo "Utilizatorul $nume a fost adaugat si s-a creat directorul home al acestu>
+exit 0
